@@ -31,7 +31,23 @@ def pt1():
 
 def pt2():
     dct_store = d4_read()
+    new_dct = {}
+
+    for game, (winning_numbers, chosen_numbers) in dct_store.items():
+        card_points = 0
+        for chosen_number in chosen_numbers:
+            if chosen_number in winning_numbers:
+                card_points += 1
+        new_dct[int(game)] = (card_points, 1)
+
+    for game, (original_score, multiplier) in new_dct.items():
+        for addition in range(1, original_score + 1):
+            new_dct[int(game) + addition] = (
+                new_dct[int(game) + addition][0], new_dct[int(game) + addition][1] + multiplier)
+
     sum_total = 0
+    for game, (original_score, multiplier) in new_dct.items():
+        sum_total += multiplier
     return sum_total
 
 
