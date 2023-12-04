@@ -1,6 +1,3 @@
-import re
-
-
 def d4_read():
     dct_store = {}
     for x in lines:
